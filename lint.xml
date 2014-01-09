@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-    <issue id="NewApi">
-        <ignore path="src\com\example\caldiningapp\Breakfast.java" />
-        <ignore path="src\com\example\caldiningapp\Dinner.java" />
-        <ignore path="src\com\example\caldiningapp\Lunch.java" />
-        <ignore path="src\com\example\caldiningapp\MainActivity.java" />
+    <issue id="NewApi" severity="ignore" />
+    <issue id="ValidFragment">
+        <ignore path="src/com/example/caldiningapp/MainActivity.java" />
     </issue>
 </lint>

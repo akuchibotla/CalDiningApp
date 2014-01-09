@@ -32,8 +32,8 @@ public class Dinner extends android.support.v4.app.Fragment{
 		View v = inflater.inflate(R.layout.activity_dinner, null);
 		//v.setBackgroundColor(Color.BLACK);
 		Resources res = getResources();
-		//Drawable drawable = res.getDrawable(R.drawable.lunch);
-		//v.setBackground(drawable); // Have to change target
+		Drawable drawable = res.getDrawable(R.drawable.dinner);
+		v.setBackground(drawable); // Have to change target
 	    ExpandableListView DinnerItems = (ExpandableListView)v.findViewById(R.id.dinnerView);
 	    DinnerItems.setAdapter(new DinnerItemsAdapter());
 	    return v;
@@ -110,17 +110,29 @@ public class Dinner extends android.support.v4.app.Fragment{
             textView.setPadding(65, 10, 10, 0);
             //textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
             textView.setTextSize(25);
-            /*if (textView.getText().toString().equals("CROSSROADS")) {
-            	textView.setBackgroundColor(Color.parseColor("#2134ac"));
+            if (textView.getText().toString().equals("CROSSROADS")) {
+            	textView.setBackgroundColor(Color.parseColor("#4262e3"));
             }
             if (textView.getText().toString().equals("CAFE 3")) {
-            	textView.setBackgroundColor(Color.parseColor("#acf321"));
+            	textView.setBackgroundColor(Color.parseColor("#4280e3"));
             }
             if (textView.getText().toString().equals("FOOTHILL")) {
-            	textView.setBackgroundColor(Color.parseColor("#0ac3de"));
+            	textView.setBackgroundColor(Color.parseColor("#42a0e3"));
             }
             if (textView.getText().toString().equals("CLARK KERR")) {
-            	textView.setBackgroundColor(Color.parseColor("#1149df"));
+            	textView.setBackgroundColor(Color.parseColor("#42c0e3"));
+            }
+            /*if (textView.getText().toString().equals("CROSSROADS")) {
+            	textView.setBackgroundColor(Color.parseColor("#00baff"));
+            }
+            if (textView.getText().toString().equals("CAFE 3")) {
+            	textView.setBackgroundColor(Color.parseColor("#00e4ff"));
+            }
+            if (textView.getText().toString().equals("FOOTHILL")) {
+            	textView.setBackgroundColor(Color.parseColor("#00ffc3"));
+            }
+            if (textView.getText().toString().equals("CLARK KERR")) {
+            	textView.setBackgroundColor(Color.parseColor("#77ffb7"));
             }*/
             return textView;
 		}

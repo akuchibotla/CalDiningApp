@@ -111,6 +111,18 @@ public class Lunch extends android.support.v4.app.Fragment{
             //textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
             textView.setTextSize(25);
             if (textView.getText().toString().equals("CROSSROADS")) {
+            	textView.setBackgroundColor(Color.parseColor("#00baff"));
+            }
+            if (textView.getText().toString().equals("CAFE 3")) {
+            	textView.setBackgroundColor(Color.parseColor("#00e4ff"));
+            }
+            if (textView.getText().toString().equals("FOOTHILL")) {
+            	textView.setBackgroundColor(Color.parseColor("#00ffc3"));
+            }
+            if (textView.getText().toString().equals("CLARK KERR")) {
+            	textView.setBackgroundColor(Color.parseColor("#77ffb7"));
+            }
+            /*if (textView.getText().toString().equals("CROSSROADS")) {
             	textView.setBackgroundColor(Color.parseColor("#4262e3"));
             }
             if (textView.getText().toString().equals("CAFE 3")) {
@@ -121,7 +133,7 @@ public class Lunch extends android.support.v4.app.Fragment{
             }
             if (textView.getText().toString().equals("CLARK KERR")) {
             	textView.setBackgroundColor(Color.parseColor("#42c0e3"));
-            }
+            }*/
             return textView;
 		}
 
