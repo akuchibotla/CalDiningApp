@@ -16,6 +16,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,15 @@ public class MainActivity extends FragmentActivity implements
 		return sList;
 	}
 
+	public static boolean CheckInternet(Context context) 
+	{
+	    ConnectivityManager connec = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    android.net.NetworkInfo wifi = connec.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+	    android.net.NetworkInfo mobile = connec.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+	    return wifi.isConnected() || mobile.isConnected();
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,7 +82,15 @@ public class MainActivity extends FragmentActivity implements
 		//bar.setLogo(R.drawable.breakfast); // API Change
 		//bar.setTitle("CAL DINING");
 		try {
-			sync.execute().get();
+			if(CheckInternet(this)){
+				   // Start your AsyncTask
+				sync.execute().get();
+
+				} else{
+				  // Show internet not available alert
+					Toast.makeText(this,"No Internet Connection",1000).show();
+					finish();
+				}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
