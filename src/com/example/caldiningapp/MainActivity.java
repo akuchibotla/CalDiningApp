@@ -83,14 +83,14 @@ public class MainActivity extends FragmentActivity implements
 		//bar.setTitle("CAL DINING");
 		try {
 			if(CheckInternet(this)){
-				   // Start your AsyncTask
+				// Start your AsyncTask
 				sync.execute().get();
 
-				} else{
-				  // Show internet not available alert
-					Toast.makeText(this,"No Internet Connection",1000).show();
-					finish();
-				}
+			} else{
+			  // Show internet not available alert
+				Toast.makeText(this, "No Internet Connection", 1000).show();
+				finish();
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (ExecutionException e) {
