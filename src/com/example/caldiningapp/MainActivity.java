@@ -14,6 +14,7 @@ import android.app.ActionBar;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -37,7 +38,7 @@ import android.widget.Toast;
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
 	
-	Syncer sync = new Syncer();
+	Syncer sync = new Syncer(this);
 	static Document parsedDoc = new Document(new String());
 	static ArrayList<String>[] menu = new ArrayList[12]; // The menu array that will contain all menus for all places at all meals
 	
@@ -139,6 +140,14 @@ public class MainActivity extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == R.id.menu_settings) {
+			Intent i = new Intent("com.example.caldiningapp.SETTINGS");
+			startActivity(i);
+		}
+		return false;
 	}
 
 	@Override

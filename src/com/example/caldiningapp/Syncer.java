@@ -8,13 +8,22 @@ import org.jsoup.select.Elements;
 
 
 import android.R;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
 
 public class Syncer extends AsyncTask<Void, Void, Document>{
-
+	
+	Context context;
+	
+	public Syncer(Context argContext){
+		context = argContext;
+	}
+	
 	public static ArrayList<String> cloneList(ArrayList<String> list) {
 		ArrayList<String> clone = new ArrayList<String>(list.size());
 		for(String item: list) clone.add(new String(item));
@@ -35,6 +44,9 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 
 	@Override
 	protected void onPostExecute(Document result) {
+		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		String diet = getPrefs.getString("diet", "1");
+		System.out.println("DIET: " + diet);
 		Elements scraped = result.select("table table td");
 		Object[] tables = scraped.toArray();
 		ArrayList<String>[] menu = new ArrayList[12];
@@ -46,7 +58,7 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 			if (!blocks.contains("Closed")) { // Only do the following if it's not closed
 				String [] item = blocks.split("<br />"); // Get each item
 				for (int j = 0; j < item.length - 3; j++) {
-					String name = (item[j].split(">")[2].split("</")[0]).replace("&amp;", "&");
+					String name = (item[j].split(">")[2].split("</")[0]).replace("&amp;", "&").replace("&quot;","\"");
 					String type = item[j].substring(9).split("#")[1].split(">")[0];
 					type = type.substring(0,type.length()-1);
 					if (type.equals("800040")){
@@ -56,6 +68,7 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 					} else if (type.equals("000000") || type.equals("0F0F0F")){
 						type = "";
 					}
+					else { type = "";}
 					curr.add(name + type);
 				}
 			}
