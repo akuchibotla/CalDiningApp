@@ -10,6 +10,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -17,6 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,13 @@ import com.example.caldiningapp.R;
 
 public class Breakfast extends android.support.v4.app.Fragment{
 	
+	private Object diet;
+
+	public Breakfast(Context context) {
+		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		this.diet = getPrefs.getString("diet", "1");
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.activity_breakfast, null);
@@ -35,13 +45,19 @@ public class Breakfast extends android.support.v4.app.Fragment{
 		Drawable drawable = res.getDrawable(R.drawable.breakfast);
 		v.setBackground(drawable); // Have to change target
 	    ExpandableListView BreakfastItems = (ExpandableListView)v.findViewById(R.id.breakfastView);
-	    BreakfastItems.setAdapter(new BreakfastItemsAdapter());
+	    BreakfastItems.setAdapter(new BreakfastItemsAdapter(this.diet));
 	    return v;
 	}
 	
 	public class BreakfastItemsAdapter extends BaseExpandableListAdapter {
 		
 		private String[] places = {"Crossroads", "Cafe 3", "Foothill", "Clark Kerr"};
+		private Object diet;
+		
+		public BreakfastItemsAdapter(Object diet) {
+			// TODO Auto-generated constructor stub
+			this.diet = diet;
+		}
 		
 		private String[][] items = {
 				MainActivity.ArrayListToArray(MainActivity.menu[0]),
@@ -49,7 +65,7 @@ public class Breakfast extends android.support.v4.app.Fragment{
 				MainActivity.ArrayListToArray(MainActivity.menu[2]),
 				MainActivity.ArrayListToArray(MainActivity.menu[3])
 		};
-		
+
 		@Override
 		public Object getChild(int arg0, int arg1) {
 			return items[arg0][arg1];
@@ -64,7 +80,8 @@ public class Breakfast extends android.support.v4.app.Fragment{
 		public View getChildView(int arg0, int arg1, boolean arg2, View arg3,
 				ViewGroup arg4) {
 			TextView textView = new TextView(Breakfast.this.getActivity());
-            textView.setText(getChild(arg0, arg1).toString());
+			textView.setText((CharSequence) diet);
+            //textView.setText(getChild(arg0, arg1).toString());
             textView.setPadding(30, 0, 0, 0);
             textView.setTextSize(17);
             /*if (arg0 == 0) {

@@ -37,7 +37,6 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements
 		ActionBar.TabListener {
-	
 	Syncer sync = new Syncer(this);
 	static Document parsedDoc = new Document(new String());
 	static ArrayList<String>[] menu = new ArrayList[12]; // The menu array that will contain all menus for all places at all meals
@@ -184,7 +183,7 @@ public class MainActivity extends FragmentActivity implements
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
 			if (position == 0) {
-				return new Breakfast();
+				return new Breakfast(getBaseContext());
 			} 
 			if (position == 1) {
 				return new Lunch();

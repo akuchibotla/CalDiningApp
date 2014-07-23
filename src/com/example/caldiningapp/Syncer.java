@@ -44,9 +44,6 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 
 	@Override
 	protected void onPostExecute(Document result) {
-		SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String diet = getPrefs.getString("diet", "1");
-		System.out.println("DIET: " + diet);
 		Elements scraped = result.select("table table td");
 		Object[] tables = scraped.toArray();
 		ArrayList<String>[] menu = new ArrayList[12];
