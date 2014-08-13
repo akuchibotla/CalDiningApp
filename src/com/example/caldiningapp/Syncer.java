@@ -50,6 +50,8 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 		//if you had a ui element, you could display the title
 		ArrayList<String> curr = new ArrayList<String>(); // The current menu for a place at a time (e.g. Crossroads Lunch)
 		int MenuIn = 0;
+		
+		
 		for (int i = 15; i <= 26; i++) {
 			String blocks = (String) tables[i].toString().split("<hr />")[1]; // All items for a specific meal (e.g. all dinner items)
 			if (!blocks.contains("Closed")) { // Only do the following if it's not closed
@@ -66,7 +68,11 @@ public class Syncer extends AsyncTask<Void, Void, Document>{
 						type = "";
 					}
 					else { type = "";}
-					curr.add(name + type);
+					
+					// Testing Calories
+					calories = "5"
+					
+					curr.add(name + type + " ("+calories+")");
 				}
 			}
 			ArrayList<String> insert = cloneList(curr);
