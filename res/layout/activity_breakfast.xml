@@ -12,7 +12,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        
-        >
+		android:choiceMode="multipleChoice"        >
     </ExpandableListView>
+
+    <Button
+        android:id="@+id/CalorieCount"
+        android:textStyle = "bold"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Click for Calories of Selected Items: 0" />
+
 </RelativeLayout>

@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity implements
 	Syncer sync = new Syncer();
 	static Document parsedDoc = new Document(new String());
 	static ArrayList<String>[] menu = new ArrayList[12]; // The menu array that will contain all menus for all places at all meals
+	static ArrayList<String>[] links = new ArrayList[12];
 	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide

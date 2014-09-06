@@ -11,5 +11,11 @@
     <string name="title_activity_breakfast">Breakfast</string>
     <string name="title_activity_lunch">Lunch</string>
     <string name="title_activity_dinner">Dinner</string>
+     <color name="text_color_default">#00000C</color>
+    <color name="text_color_inverse">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="list_row_default_bg">#ffffff</color>
+    <color name="list_row_pressed_bg">#008cef</color>
+    <color name="list_row_selected_bg">#86d3f6</color>
 
 </resources>
