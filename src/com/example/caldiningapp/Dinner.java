@@ -3,6 +3,7 @@ package com.example.caldiningapp;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 
@@ -21,12 +22,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
+
 import com.example.caldiningapp.R;
 
 public class Dinner extends android.support.v4.app.Fragment{
-	
+	static int calorie = 0;
+    HashSet<Long> selected = new HashSet<Long>();
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.activity_dinner, null);
@@ -36,6 +43,96 @@ public class Dinner extends android.support.v4.app.Fragment{
 		v.setBackground(drawable); // Have to change target
 	    ExpandableListView DinnerItems = (ExpandableListView)v.findViewById(R.id.dinnerView);
 	    DinnerItems.setAdapter(new DinnerItemsAdapter());
+	    
+	    DinnerItems.setOnGroupClickListener(new OnGroupClickListener() {
+	        public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) 
+	        {
+	        	selected.clear();
+	        	return false;
+	        }
+	        });
+	    DinnerItems.setOnChildClickListener(new OnChildClickListener() {
+	    
+	    
+			@Override
+			public boolean onChildClick(final ExpandableListView parent, View v,
+					final int groupposition, final int childposition, long id) {
+				v.setSelected(true);
+				/*int index = parent.getFlatListPosition(ExpandableListView
+		                   .getPackedPositionForChild(groupposition, childposition));
+				parent.setItemChecked(index, true);*/
+				/*Syncer2 sync = new Syncer2();
+				int itemcalorie = 0;
+            	try {
+					itemcalorie = sync.execute(MainActivity.ArrayListToArray(MainActivity.links[groupposition])[childposition]).get();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	*/
+                
+				if (v != null) {
+			    	if (v.isSelected())
+			    	{
+			    		if (selected.contains(parent.getPackedPositionForChild(groupposition,childposition)))
+			    		{
+			    			v.setBackground(null);
+			    			selected.remove(parent.getPackedPositionForChild(groupposition,childposition));
+			    			//calorie -= itemcalorie;
+			    		}
+			    		else
+			    		{	
+			    			v.setBackgroundColor(Color.RED);
+			    			selected.add(parent.getPackedPositionForChild(groupposition,childposition));
+			    			//calorie +=itemcalorie;
+			    		}
+			    	}
+
+			    }
+				//Toast.makeText(Dinner.this.getActivity(),Integer.toString(calorie),
+                       // Toast.LENGTH_SHORT).show();
+				final Button p1_button = (Button) Dinner.this.getActivity().findViewById(R.id.CalorieCount3);
+				p1_button.setOnClickListener(new View.OnClickListener() {
+		             public void onClick(View v) {
+		                 // Perform action on click
+		            	calorie = 0;
+		            	for (long i : selected)
+		            	{
+
+		            		Syncer2 sync = new Syncer2();
+		            		int child = parent.getPackedPositionChild(i);
+		            		int group = parent.getPackedPositionGroup(i);
+		            		int itemcalorie = 0;
+		            		try {
+		            			if (MainActivity.ArrayListToArray(MainActivity.links[group+8])[child].contains("Closed"))
+		            			{
+		            				itemcalorie = 0;
+		            				Toast.makeText(Dinner.this.getActivity(),"Please Select Valid Items Only",Toast.LENGTH_SHORT).show();
+		            			}
+		            			else
+		            				itemcalorie = sync.execute(MainActivity.ArrayListToArray(MainActivity.links[group+8])[child]).get();
+			 				} catch (InterruptedException e) {
+			 					// TODO Auto-generated catch block
+			 					e.printStackTrace();
+			 				} catch (ExecutionException e) {
+			 					// TODO Auto-generated catch block
+			 					e.printStackTrace();
+			 				}
+		            		//Toast.makeText(Dinner.this.getActivity(),Integer.toString(itemcalorie),Toast.LENGTH_SHORT).show();
+		            		calorie += itemcalorie;
+		            	}
+		             	
+		 				p1_button.setText("Click for Calories of Selected Items: " + Integer.toString(calorie));
+
+		             }
+		         });
+			    return true;
+			}
+	    	
+	    });
 	    return v;
 	}
 	

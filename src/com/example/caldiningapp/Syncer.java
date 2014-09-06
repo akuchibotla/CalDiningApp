@@ -8,12 +8,17 @@ import org.jsoup.select.Elements;
 
 
 import android.R;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
 
+
 public class Syncer extends AsyncTask<Void, Void, ArrayList<String>[]>{
+
 
 	public static ArrayList<String> cloneList(ArrayList<String> list) {
 		ArrayList<String> clone = new ArrayList<String>(list.size());
@@ -128,5 +133,6 @@ public class Syncer extends AsyncTask<Void, Void, ArrayList<String>[]>{
 	protected void onPostExecute(ArrayList<String>[] result) {
 		
 		MainActivity.menu = result;
+	
 	}
 }

@@ -12,4 +12,14 @@
         android:layout_alignParentTop="true" >
     </ExpandableListView>
 
+    <Button
+        android:id="@+id/CalorieCount3"
+        android:textStyle = "bold"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Click for Calories of Selected Items: 0" />
+    
 </RelativeLayout>
