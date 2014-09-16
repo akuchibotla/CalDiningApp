@@ -11,6 +11,7 @@ import com.example.caldiningapp.MainActivity.SelectFragment;
 
 
 import android.app.ActionBar;
+import android.app.Dialog;
 
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -144,7 +145,13 @@ public class MainActivity extends FragmentActivity implements
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.menu_settings) {
-			Intent i = new Intent("com.example.caldiningapp.SETTINGS");
+			//Intent i = new Intent("com.example.caldiningapp.SETTINGS");
+			//startActivity(i);
+		}
+		
+		if (item.getItemId() == R.id.action_about)
+		{
+			Intent i = new Intent(MainActivity.this, About.class);
 			startActivity(i);
 		}
 		return false;
